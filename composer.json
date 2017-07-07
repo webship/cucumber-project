@@ -1,5 +1,5 @@
 {
-    "name": "natshah/cucumber-project",
+    "name": "webship/cucumber-project",
     "description": "Project template for Cucumber Management System projects with composer",
     "type": "project",
     "license": "GPL-2.0+",
@@ -21,26 +21,7 @@
         }
     ],
     "require": {
-        "composer/installers": "^1.2",
-        "cweagans/composer-patches": "^1.6",
-        "drupal-composer/drupal-scaffold": "^2.2",
-        "drupal/console": "~1.0",
-        "drush/drush": "~8.0",
-        "webflo/drupal-finder": "^0.3.0",
-        "webmozart/path-util": "^2.3",
-        "natshah/cucumber": "8.1.x-dev"
-    },
-    "require-dev": {
-        "behat/mink": "~1.7",
-        "behat/mink-goutte-driver": "~1.2",
-        "jcalderonzumba/gastonjs": "~1.0.2",
-        "jcalderonzumba/mink-phantomjs-driver": "~0.3.1",
-        "mikey179/vfsstream": "~1.2",
-        "phpunit/phpunit": ">=4.8.28 <5",
-        "symfony/css-selector": "~2.8"
-    },
-    "conflict": {
-        "drupal/drupal": "*"
+        "webship/cucumber": "8.1.x-dev"
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
