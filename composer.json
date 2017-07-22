@@ -5,8 +5,8 @@
     "license": "GPL-2.0+",
     "authors": [
       {
-        "name": "Rajab Natshah",
-        "homepage": "https://github.com/Natshah",
+        "name": "Webship",
+        "homepage": "https://github.com/webship",
         "role": "Maintainer"
       }
     ],
@@ -55,11 +55,11 @@
             "dev-8.x-1.x": "8.1.x-dev"
         },
         "installer-paths": {
-            "web/core": ["type:drupal-core"],
-            "web/libraries/{$name}": ["type:drupal-library"],
-            "web/modules/{$name}": ["type:drupal-module"],
-            "web/profiles/{$name}": ["type:drupal-profile"],
-            "web/themes/{$name}": ["type:drupal-theme"],
+            "docroot/core": ["type:drupal-core"],
+            "docroot/libraries/{$name}": ["type:drupal-library"],
+            "docroot/modules/{$name}": ["type:drupal-module"],
+            "docroot/profiles/{$name}": ["type:drupal-profile"],
+            "docroot/themes/{$name}": ["type:drupal-theme"],
             "drush/{$name}": ["type:drupal-drush"]
         },
         "enable-patching": true
