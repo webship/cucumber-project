@@ -1,67 +1,57 @@
 {
-    "name": "webship/cucumber-project",
-    "description": "Project template for Cucumber Management System projects with composer",
-    "type": "project",
-    "license": "GPL-2.0+",
-    "authors": [
-      {
-        "name": "Webship",
-        "homepage": "https://github.com/webship",
-        "role": "Maintainer"
-      }
-    ],
-    "support": {
-      "issues": "http://drupal.org/project/issues/cucumber",
-      "source": "http://cgit.drupalcode.org/cucumber"
-    },
-    "repositories": [
-        {
-            "type": "composer",
-            "url": "https://packages.drupal.org/8"
-        }
-    ],
-    "require": {
-        "webship/cucumber": "8.1.x-dev"
-    },
-    "minimum-stability": "dev",
-    "prefer-stable": true,
-    "config": {
-        "bin-dir": "bin/",
-        "sort-packages": true,
-        "secure-http": false
-    },
-    "autoload": {
-        "classmap": [
-            "scripts/composer/ScriptHandler.php"
-        ]
-    },
-    "scripts": {
-        "drupal-scaffold": "DrupalComposer\\DrupalScaffold\\Plugin::scaffold",
-        "pre-install-cmd": [
-            "DrupalProject\\composer\\ScriptHandler::checkComposerVersion"
-        ],
-        "pre-update-cmd": [
-            "DrupalProject\\composer\\ScriptHandler::checkComposerVersion"
-        ],
-        "post-install-cmd": [
-            "DrupalProject\\composer\\ScriptHandler::createRequiredFiles"
-        ],
-        "post-update-cmd": [
-            "DrupalProject\\composer\\ScriptHandler::createRequiredFiles"
-        ]
-    },
-    "extra": {
-        "branch-alias": {
-            "dev-8.x-1.x": "8.1.x-dev"
-        },
-        "installer-paths": {
-            "docroot/core": ["type:drupal-core"],
-            "docroot/libraries/{$name}": ["type:drupal-library"],
-            "docroot/modules/{$name}": ["type:drupal-module"],
-            "docroot/profiles/{$name}": ["type:drupal-profile"],
-            "docroot/themes/{$name}": ["type:drupal-theme"],
-            "drush/{$name}": ["type:drupal-drush"]
-        },
-        "enable-patching": true
+  "name": "webship/cucumber-project",
+  "description": "Project template for Cucumber Management System projects with composer",
+  "type": "project",
+  "license": "GPL-2.0+",
+  "authors": [
+    {
+      "name": "Webship",
+      "homepage": "https://github.com/webship",
+      "role": "Maintainer"
     }
+  ],
+  "support": {
+    "issues": "http://drupal.org/project/issues/cucumber",
+    "source": "http://cgit.drupalcode.org/cucumber"
+  },
+  "repositories": [
+    {
+      "type": "composer",
+      "url": "https://packages.drupal.org/8"
+    }
+  ],
+  "require": {
+    "composer/installers": "1.4.0",
+    "cweagans/composer-patches": "1.6.2",
+    "drupal-composer/drupal-scaffold": "2.3.0",
+    "drupal/drupal-library-installer-plugin": "0.3",
+    "webship/cucumber": "8.1.x-dev"
+  },
+  "conflict": {
+    "drupal/drupal": "*"
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "config": {
+    "bin-dir": "bin/",
+    "secure-http": false
+  },
+  "extra": {
+    "branch-alias": {
+      "dev-8.x-1.x": "8.1.x-dev",
+      "dev-8.1.x": "8.1.x-dev"
+    },
+    "installer-paths": {
+      "web/core": ["drupal/core"],
+      "web/profiles/{$name}": ["type:drupal-profile"],
+      "web/modules/contrib/{$name}": ["type:drupal-module"],
+      "web/themes/contrib/{$name}": ["type:drupal-theme"],
+      "web/libraries/{$name}": ["type:drupal-library"],
+      "web/modules/custom/{$name}": ["type:drupal-custom-module"],
+      "web/themes/custom/{$name}": ["type:drupal-custom-theme"],
+      "drush/contrib/{$name}": ["type:drupal-drush"]
+    },
+    "enable-patching": true,
+    "composer-exit-on-patch-failure": true
+  }
 }
