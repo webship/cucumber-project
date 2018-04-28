@@ -14,17 +14,24 @@
     "issues": "http://drupal.org/project/issues/cucumber",
     "source": "http://cgit.drupalcode.org/cucumber"
   },
-  "repositories": [
-    {
+  "repositories": {
+    "drupal": {
       "type": "composer",
       "url": "https://packages.drupal.org/8"
+      },
+    "assets": {
+      "type": "composer",
+      "url": "https://asset-packagist.org"
     }
-  ],
+  },
   "require": {
-    "composer/installers": "1.4.0",
-    "cweagans/composer-patches": "1.6.2",
-    "drupal-composer/drupal-scaffold": "2.3.0",
+    "composer/installers": "1.5.0",
+    "oomphinc/composer-installers-extender": "1.1.2",
+    "cweagans/composer-patches": "1.6.4",
+    "drupal-composer/drupal-scaffold": "2.4.0",
     "drupal/drupal-library-installer-plugin": "0.3",
+    "webflo/drupal-finder": "1.1.0",
+    "webmozart/path-util": "2.3.0",
     "webship/cucumber": "8.1.x-dev"
   },
   "conflict": {
@@ -41,12 +48,20 @@
       "dev-8.x-1.x": "8.1.x-dev",
       "dev-8.1.x": "8.1.x-dev"
     },
+    "installer-types": [
+      "bower-asset",
+      "npm-asset"
+    ],
     "installer-paths": {
       "web/core": ["drupal/core"],
       "web/profiles/{$name}": ["type:drupal-profile"],
       "web/modules/contrib/{$name}": ["type:drupal-module"],
       "web/themes/contrib/{$name}": ["type:drupal-theme"],
-      "web/libraries/{$name}": ["type:drupal-library"],
+      "web/libraries/{$name}": [
+          "type:drupal-library",
+          "type:bower-asset",
+          "type:npm-asset"
+      ],
       "web/modules/custom/{$name}": ["type:drupal-custom-module"],
       "web/themes/custom/{$name}": ["type:drupal-custom-theme"],
       "drush/contrib/{$name}": ["type:drupal-drush"]
