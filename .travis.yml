@@ -79,8 +79,17 @@ install:
   - git checkout $TRAVIS_COMMIT
   ## Build with the composer.
   - composer install --no-interaction
-  - composer require "drupal/coder:@stable" "drupal/drupal-extension:@stable" "behat/behat:@stable" "behat/mink:@stable" "behat/mink-extension:@stable" "behat/mink-goutte-driver:@stable" "behat/mink-zombie-driver:@stable" "behat/mink-selenium2-driver:@stable" "behatch/contexts:@stable" "emuse/behat-html-formatter:@stable"
-        
+  - composer require "drupal/coder:@stable"
+  - composer require "drupal/drupal-extension:@stable"
+  - composer require "behat/behat:@stable"
+  - composer require "behat/mink:@stable"
+  - composer require "behat/mink-extension:@stable"
+  - composer require "behat/mink-goutte-driver:@stable"
+  - composer require "behat/mink-zombie-driver:@stable"
+  - composer require "behat/mink-selenium2-driver:@stable"
+  - composer require "behatch/contexts:@stable"
+  - composer require "emuse/behat-html-formatter:@stable"
+
   ## Install with drush.
   - cd web
   - drush site-install cucumber --yes --site-name='Cucumber' --account-name=admin --account-pass=dD.123123ddd --account-mail=cucumber@webship.org --db-url="mysql://root:@localhost/test_cucumber" 
