@@ -2,6 +2,8 @@
 
 Project template for Cucumber Management System projects with composer
 
+[![Cucumber](https://www.drupal.org/files/project-images/drupal-cucumber.png)](https://www.drupal.org/project/cucumber)
+
 ## Usage
 
 First you need to [install composer](https://getcomposer.org/doc/00-intro.md#installation-linux-unix-osx).
