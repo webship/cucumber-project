@@ -1,0 +1,99 @@
+dist: trusty
+
+language: php
+cache:
+  bundler: true
+  directories:
+    - "$HOME/.composer/cache"
+    - "$HOME/.drush/cache"
+    - "$HOME/.npm"
+    - "$HOME/.selenium/cache"
+
+php:
+  - 7.1
+  - 7.2
+  - 7.3
+
+mysql:
+  database: test_cucumber
+  username: root
+  encoding: utf8
+
+before_install:
+  - composer self-update
+  - composer --version
+
+  # Composer Configurations.
+  - export PATH="$HOME/.composer/vendor/bin:$TRAVIS_BUILD_DIR/bin:$PATH"
+  - export COMPOSER_EXIT_ON_PATCH_FAILURE=1
+
+  # MySQL Configurations.
+  - mysql -e 'SET GLOBAL wait_timeout = 5400;'
+  - mysql -e "SHOW VARIABLES LIKE 'wait_timeout'"
+
+  # PHP Configurations.
+  - echo 'max_execution_time = 2200' >> cucumber.php.ini;
+  - echo 'max_input_time = 180' >> cucumber.php.ini;
+  - echo 'max_input_vars = 10000' >> cucumber.php.ini;
+  - echo 'memory_limit = 4000M' >> cucumber.php.ini;
+  - echo 'error_reporting = E_ALL' >> cucumber.php.ini;
+  - echo 'post_max_size = 64M' >> cucumber.php.ini;
+  - echo 'upload_max_filesize = 32M' >> cucumber.php.ini;
+  - echo 'max_file_uploads = 40' >> cucumber.php.ini;
+  - echo 'sendmail_path = /bin/true' >> cucumber.php.ini;
+  - phpenv config-add cucumber.php.ini
+  - phpenv rehash
+
+  # Configure and run the virtual display.
+  - export DISPLAY=:99
+  - sh -e /etc/init.d/xvfb start
+  - Xvfb :99 -ac -screen 0 1366x768x24 &>/dev/null &
+  - sleep 3
+
+  # Download Latest Chrome Driver.
+  - CHROME_DRIVER_VERSION=$(wget -qO- chromedriver.storage.googleapis.com/LATEST_RELEASE);
+  - echo $CHROME_DRIVER_VERSION;
+  - wget http://chromedriver.storage.googleapis.com/$CHROME_DRIVER_VERSION/chromedriver_linux64.zip
+  - unzip chromedriver_linux64.zip
+  - chmod +x chromedriver
+  - mkdir -p $HOME/.composer/vendor/bin
+  - mv -f chromedriver $HOME/.composer/vendor/bin/
+  - rm chromedriver_linux64.zip
+
+  # Update to latest Chrome browser.
+  - export CHROME_BIN=/usr/bin/google-chrome
+  - wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+  - sudo apt-get clean
+  - sudo apt-get update
+  - sudo apt-get install dpkg
+  - sudo dpkg -i google-chrome-stable_current_amd64.deb
+  - rm google-chrome-stable_current_amd64.deb
+  - google-chrome --version
+
+  # Run selenium standalone server.
+  - SELENIUM="$HOME/.selenium/cache/selenium-server-standalone-2.53.1.jar";
+  - if [[ ! -f $SELENIUM ]]; then wget -O $SELENIUM http://selenium-release.storage.googleapis.com/2.53/selenium-server-standalone-2.53.1.jar; fi
+  - java -jar $SELENIUM -port 4445 > /dev/null 2>&1 &
+  - echo "[  OK  ] Starting Selenium on the 4445 port ..."
+install:
+  - git checkout $TRAVIS_COMMIT
+  ## Build with the composer.
+  - composer install --no-interaction
+  - composer require "drupal/coder:@stable" "drupal/drupal-extension:@stable" "behat/behat:@stable" "behat/mink:@stable" "behat/mink-extension:@stable" "behat/mink-goutte-driver:@stable" "behat/mink-zombie-driver:@stable" "behat/mink-selenium2-driver:@stable" "behatch/contexts:@stable" "emuse/behat-html-formatter:@stable"
+        
+  ## Install with drush.
+  - cd web
+  - drush site-install cucumber --yes --site-name='VDO' --account-name=admin --account-pass=dD.123123ddd --account-mail=cucumber@webship.org --db-url="mysql://root:@localhost/test_cucumber" 
+  - drush config-set system.performance css.preprocess 0 --yes
+  - drush config-set system.performance js.preprocess 0 --yes
+  - drush config-set system.logging error_level all --yes
+  - drush cr
+before_script:
+  - drush runserver --default-server=builtin 8080 &>/dev/null &
+  - sleep 5
+script:
+  - cd /home/travis/build/webship/cucumber-project/web/profiles/cucumber/
+  - ../../../bin/behat tests/features/cucumber/
+
+matrix:
+  fast_finish: true

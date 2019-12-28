@@ -1,72 +1,76 @@
 {
   "name": "webship/cucumber-project",
   "description": "Project template for Cucumber Management System projects with composer",
-  "type": "project",
-  "license": "GPL-2.0-or-later",
-  "authors": [
-    {
-      "name": "Webship",
-      "homepage": "https://github.com/webship",
-      "role": "Maintainer"
-    }
-  ],
-  "support": {
+    "type": "project",
+    "license": "GPL-2.0-or-later",
+    "authors": [
+      {
+        "name": "Webship",
+        "homepage": "https://github.com/webship",
+        "role": "Maintainer"
+      }
+    ],
+    "support": {
     "issues": "http://drupal.org/project/issues/cucumber",
     "source": "http://cgit.drupalcode.org/cucumber"
-  },
-  "repositories": {
-    "drupal": {
-      "type": "composer",
-      "url": "https://packages.drupal.org/8"
-      },
-    "assets": {
-      "type": "composer",
-      "url": "https://asset-packagist.org"
-    }
-  },
-  "require": {
-    "composer/installers": "1.5.0",
-    "oomphinc/composer-installers-extender": "1.1.2",
-    "cweagans/composer-patches": "1.6.4",
-    "drupal-composer/drupal-scaffold": "2.4.0",
-    "drupal/drupal-library-installer-plugin": "0.3",
-    "webflo/drupal-finder": "1.1.0",
-    "webmozart/path-util": "2.3.0",
-    "webship/cucumber": "8.1.x-dev"
-  },
-  "conflict": {
-    "drupal/drupal": "*"
-  },
-  "minimum-stability": "dev",
-  "prefer-stable": true,
-  "config": {
-    "bin-dir": "bin/",
-    "secure-http": false
-  },
-  "extra": {
-    "branch-alias": {
-      "dev-8.x-1.x": "8.1.x-dev",
-      "dev-8.1.x": "8.1.x-dev"
     },
-    "installer-types": [
-      "bower-asset",
-      "npm-asset"
+    "repositories": [
+      {
+        "type": "composer",
+        "url": "https://packages.drupal.org/8"
+      }
     ],
-    "installer-paths": {
-      "web/core": ["drupal/core"],
-      "web/profiles/{$name}": ["type:drupal-profile"],
-      "web/modules/contrib/{$name}": ["type:drupal-module"],
-      "web/themes/contrib/{$name}": ["type:drupal-theme"],
-      "web/libraries/{$name}": [
-          "type:drupal-library",
-          "type:bower-asset",
-          "type:npm-asset"
-      ],
-      "web/modules/custom/{$name}": ["type:drupal-custom-module"],
-      "web/themes/custom/{$name}": ["type:drupal-custom-theme"],
-      "drush/contrib/{$name}": ["type:drupal-drush"]
+    "require": {
+      "composer/installers": "^1.0",
+      "cweagans/composer-patches": "^1.0",
+      "drupal/core-composer-scaffold": "^8.8",
+      "drupal/core-project-message": "^8.8",
+      "drupal/console": "^1.0",
+      "drush/drush": "^9.0",
+      "webship/cucumber": "8.1.x-dev"
     },
-    "enable-patching": true,
-    "composer-exit-on-patch-failure": true
-  }
+    "conflict": {
+      "drupal/drupal": "*"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "config": {
+      "bin-dir": "bin/",
+      "secure-http": false,
+      "preferred-install": {
+        "drupal/core": "dist"
+      },
+      "sort-packages": true
+    },
+    "extra": {
+      "drupal-scaffold": {
+          "locations": {
+              "web-root": "web/"
+          }
+      },
+      "enable-patching": true,
+      "composer-exit-on-patch-failure": true,
+      "patchLevel": {
+        "drupal/core": "-p2"
+      },
+      "installer-paths": {
+        "web/core": ["type:drupal-core"],
+        "web/libraries/{$name}": ["type:drupal-library"],
+        "web/modules/contrib/{$name}": ["type:drupal-module"],
+        "web/profiles/{$name}": ["type:drupal-profile"],
+        "web/themes/contrib/{$name}": ["type:drupal-theme"],
+        "drush/Commands/contrib/{$name}": ["type:drupal-drush"],
+        "web/modules/custom/{$name}": ["type:drupal-custom-module"],
+        "web/themes/custom/{$name}": ["type:drupal-custom-theme"]
+      },
+      "drupal-core-project-message": {
+          "include-keys": ["homepage", "support"],
+          "post-create-project-cmd-message": [
+              "<bg=green;fg=white>                                                                                </>",
+              "<bg=green;fg=white>  Congratulations, you’ve installed the Drupal Cucumber codebase                </>",
+              "<bg=green;fg=white>  from the webship/cucumber-project template!                                   </>",
+              "<bg=green;fg=white>                                                                                </>"
+          ]
+      }
+    }
 }
