@@ -5,21 +5,30 @@
     "license": "GPL-2.0-or-later",
     "authors": [
       {
+        "name": "Vardot",
+        "homepage": "https://www.drupal.org/vardot",
+        "role": "Initial building, ongoing maintenance and development"
+      },
+      {
         "name": "Webship",
-        "homepage": "https://github.com/webship",
-        "role": "Maintainer"
+        "homepage": "https://www.drupal.org/webship",
+        "role": "Volunteer contributions"
       }
     ],
     "support": {
     "issues": "http://drupal.org/project/issues/cucumber",
     "source": "http://cgit.drupalcode.org/cucumber"
     },
-    "repositories": [
-      {
+    "repositories": {
+      "drupal": {
         "type": "composer",
         "url": "https://packages.drupal.org/8"
+      },
+      "assets": {
+        "type": "composer",
+        "url": "https://asset-packagist.org"
       }
-    ],
+    },
     "require": {
       "composer/installers": "^1.0",
       "cweagans/composer-patches": "^1.0",
@@ -27,18 +36,8 @@
       "drupal/core-project-message": "^8.8",
       "webship/cucumber": "8.1.x-dev"
     },
-    "require-dev": {
-      "drupal/console": "^1.0",
-      "drush/drush": "^9.0",
-      "drupal/drupal-extension": "~3.0",
-      "behat/behat": "~3.0",
-      "behat/mink": "~1.0",
-      "behat/mink-extension": "~2.0",
-      "behat/mink-goutte-driver": "~1.0",
-      "behat/mink-zombie-driver": "~1.0",
-      "behat/mink-selenium2-driver": "~1.0",
-      "behatch/contexts": "~3.0",
-      "emuse/behat-html-formatter": "^0.2.0"
+    "replace": {
+      "ajaxorg/ace-builds": "*"
     },
     "conflict": {
       "drupal/drupal": "*"
@@ -67,15 +66,30 @@
       "patchLevel": {
         "drupal/core": "-p2"
       },
+      "installer-types": [
+        "bower-asset",
+        "npm-asset"
+      ],
       "installer-paths": {
         "web/core": ["type:drupal-core"],
-        "web/libraries/{$name}": ["type:drupal-library"],
-        "web/modules/contrib/{$name}": ["type:drupal-module"],
         "web/profiles/{$name}": ["type:drupal-profile"],
+        "web/modules/contrib/{$name}": ["type:drupal-module"],
         "web/themes/contrib/{$name}": ["type:drupal-theme"],
-        "drush/Commands/contrib/{$name}": ["type:drupal-drush"],
+        "web/libraries/ace": ["npm-asset/ace-builds"],
+        "web/libraries/{$name}": [
+          "type:drupal-library",
+          "type:bower-asset",
+          "type:npm-asset"
+        ],
         "web/modules/custom/{$name}": ["type:drupal-custom-module"],
-        "web/themes/custom/{$name}": ["type:drupal-custom-theme"]
+        "web/themes/custom/{$name}": ["type:drupal-custom-theme"],
+        "drush/contrib/{$name}": ["type:drupal-drush"]
+      },
+      "drupal-libraries": {
+        "library-directory": "web/libraries",
+        "libraries": [
+          {"name": "ace", "package": "npm-asset/ace-builds"}
+        ]
       },
       "drupal-core-project-message": {
         "include-keys": ["homepage", "support"],
