@@ -20,6 +20,10 @@
     "source": "http://cgit.drupalcode.org/cucumber"
     },
     "repositories": {
+      "packagist.org": {
+        "type": "composer",
+        "url": "https://packagist.org"
+      },
       "drupal": {
         "type": "composer",
         "url": "https://packages.drupal.org/8"
@@ -51,7 +55,10 @@
       "preferred-install": {
         "drupal/core": "dist"
       },
-      "sort-packages": true
+      "sort-packages": true,
+      "github-protocols": [
+        "https,ssh"
+      ]
     },
     "extra": {
       "drupal-scaffold": {
