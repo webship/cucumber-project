@@ -15,5 +15,5 @@ for your setup.
 After that you can create the project:
 
 ```
-composer create-project webship/cucumber-project:8.1.x-dev CUCUMBER_PROJECT_FOLDER_NAME --stability dev --no-interaction
+composer create-project webship/cucumber-project:9.0.x-dev CUCUMBER_PROJECT_FOLDER_NAME --stability dev --no-interaction
 ```

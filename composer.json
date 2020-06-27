@@ -30,11 +30,12 @@
       }
     },
     "require": {
-      "composer/installers": "^1.0",
-      "cweagans/composer-patches": "^1.0",
-      "drupal/core-composer-scaffold": "^8.8",
-      "drupal/core-project-message": "^8.8",
-      "webship/cucumber": "8.1.x-dev"
+      "composer/installers": "~1.0",
+      "oomphinc/composer-installers-extender": "~1.0",
+      "drupal/core-composer-scaffold": "~9.0",
+      "drupal/core-project-message": "~9.0",
+      "drupal/drupal-library-installer-plugin": "^0.3",
+      "webship/cucumber": "9.0.x-dev"
     },
     "replace": {
       "ajaxorg/ace-builds": "*"
@@ -57,9 +58,6 @@
         "locations": {
           "web-root": "web/"
         }
-      },
-      "branch-alias": {
-        "dev-8.x-1.x": "8.1.x-dev"
       },
       "enable-patching": true,
       "composer-exit-on-patch-failure": true,
