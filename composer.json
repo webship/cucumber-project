@@ -39,7 +39,7 @@
       "drupal/core-composer-scaffold": "~9.0",
       "drupal/core-project-message": "~9.0",
       "drupal/drupal-library-installer-plugin": "^0.3",
-      "webship/cucumber": "9.0.x-dev"
+      "webship/cucumber": "~9.0"
     },
     "replace": {
       "ajaxorg/ace-builds": "*"
