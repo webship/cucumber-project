@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/webship/cucumber.svg?branch=9.0.0-alpha2)](https://travis-ci.com/github/webship/cucumber/builds/205034599) Cucumber 9.0.0-alpha2
+
 # Cucumber Project
 
 Project template for Cucumber Management System projects with composer
@@ -14,7 +16,7 @@ for your setup.
 
 To install the most recent stable release of Cucumber 9.0.x run this command:
 ```
-composer create-project webship/cucumber-project:^9.0.0-alpha1 WEBSITE_NAME --no-dev --no-interaction
+composer create-project webship/cucumber-project:^9.0.0-alpha2 WEBSITE_NAME --no-dev --no-interaction
 ```
 
 To install the dev version of Cucumber 9.0.x run this command:
