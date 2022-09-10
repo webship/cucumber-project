@@ -3,24 +3,22 @@
   "description": "Project template for Cucumber Management System projects with composer",
   "type": "project",
   "license": "GPL-2.0-or-later",
+  "homepage": "https://webship.co",
+  "support": {
+    "docs": "https://www.drupal.org/docs/user_guide/en/index.html",
+    "chat": "https://app.slack.com/client/T06GX3JTS/C7MAHMJRE",
+    "issues": "http://drupal.org/project/issues/cucumber",
+    "source": "http://cgit.drupalcode.org/cucumber"
+  },
   "minimum-stability": "dev",
   "prefer-stable": true,
   "authors": [
-    {
-      "name": "Vardot",
-      "homepage": "https://www.drupal.org/vardot",
-      "role": "Initial building, ongoing maintenance and development"
-    },
     {
       "name": "Webship",
       "homepage": "https://www.drupal.org/webship",
       "role": "Volunteer contributions"
     }
   ],
-  "support": {
-    "issues": "http://drupal.org/project/issues/cucumber",
-    "source": "http://cgit.drupalcode.org/cucumber"
-  },
   "repositories": {
     "drupal": {
       "type": "composer",
@@ -32,11 +30,15 @@
     }
   },
   "require": {
-    "composer/installers": "~1.0 || ~2.0",
-    "oomphinc/composer-installers-extender": "~1.0 || ~2.0",
-    "drupal/core-composer-scaffold": "~9.0",
+    "composer/installers": "~2.0",
+    "oomphinc/composer-installers-extender": "~2.0",
     "cweagans/composer-patches": "~1.0",
+    "drupal/core-composer-scaffold": "~9.0",
     "webship/cucumber": "9.0.x-dev"
+  },
+  "require-dev": {
+    "drupal/core-dev": "~9.0",
+    "drupal/webtest": "9.0.x-dev"
   },
   "conflict": {
     "drupal/drupal": "*"
@@ -52,13 +54,31 @@
       "composer/installers": true,
       "cweagans/composer-patches": true,
       "oomphinc/composer-installers-extender": true,
-      "drupal/core-composer-scaffold": true
+      "drupal/core-composer-scaffold": true,
+      "dealerdirect/phpcodesniffer-composer-installer": true
     }
   },
   "extra": {
     "drupal-scaffold": {
+      "allowed-packages": [
+        "drupal/core",
+        "webship/cucumber"
+      ],
+      "gitignore": true,
       "locations": {
         "web-root": "web/"
+      },
+      "file-mapping": {
+        "[web-root]/sites/default/default.services.yml": {
+          "mode": "replace",
+          "overwrite": false,
+          "path": "web/core/assets/scaffold/files/default.services.yml"
+        },
+        "[web-root]/sites/default/default.settings.php": {
+          "mode": "replace",
+          "overwrite": false,
+          "path": "web/core/assets/scaffold/files/default.settings.php"
+        }
       }
     },
     "installer-paths": {
@@ -66,15 +86,28 @@
       "web/profiles/contrib/{$name}": ["type:drupal-profile"],
       "web/modules/contrib/{$name}": ["type:drupal-module"],
       "web/themes/contrib/{$name}": ["type:drupal-theme"],
-      "web/libraries/{$name}": ["type:drupal-library"],
+      "web/libraries/{$name}": [
+        "type:drupal-library",
+        "type:bower-asset",
+        "type:npm-asset"
+      ],
       "web/modules/custom/{$name}": ["type:drupal-custom-module"],
       "web/themes/custom/{$name}": ["type:drupal-custom-theme"],
       "drush/contrib/{$name}": ["type:drupal-drush"]
+    },
+    "installer-types": [
+      "bower-asset",
+      "npm-asset"
+    ],
+    "drupal-libraries": {
+      "library-directory": "web/libraries",
+      "libraries": [ ]
     },
     "enable-patching": true,
     "composer-exit-on-patch-failure": true,
     "patchLevel": {
       "drupal/core": "-p2"
-    }
+    },
+    "patches": {}
   }
 }
