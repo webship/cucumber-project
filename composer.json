@@ -1,12 +1,9 @@
 {
   "name": "webship/cucumber-project",
-  "description": "Project template for Cucumber Management System projects with composer",
+  "description": "Project template for Cucumber Automated Functional Acceptance Testing Management system projects with composer",
   "type": "project",
   "license": "GPL-2.0-or-later",
-  "homepage": "https://webship.co",
   "support": {
-    "docs": "https://www.drupal.org/docs/user_guide/en/index.html",
-    "chat": "https://app.slack.com/client/T06GX3JTS/C7MAHMJRE",
     "issues": "http://drupal.org/project/issues/cucumber",
     "source": "http://cgit.drupalcode.org/cucumber"
   },
@@ -14,9 +11,14 @@
   "prefer-stable": true,
   "authors": [
     {
+      "name": "Vardot",
+      "homepage": "https://www.drupal.org/vardot",
+      "role": "Supporting organization"
+    },
+    {
       "name": "Webship",
       "homepage": "https://www.drupal.org/webship",
-      "role": "Volunteer contributions"
+      "role": "Supporting organization"
     }
   ],
   "repositories": {
@@ -33,11 +35,8 @@
     "composer/installers": "~2.0",
     "oomphinc/composer-installers-extender": "~2.0",
     "cweagans/composer-patches": "~1.0",
-    "drupal/core-composer-scaffold": "~9.0",
-    "webship/cucumber": "9.0.x-dev"
-  },
-  "require-dev": {
-    "drupal/core-dev": "~9.0"
+    "drupal/core-composer-scaffold": "~10.0",
+    "webship/cucumber": "10.0.x-dev"
   },
   "conflict": {
     "drupal/drupal": "*"
