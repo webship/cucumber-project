@@ -230,6 +230,6 @@ workflows:
       - cucumber-testing:
           filters:
             tags:
-              only: /^9.0.*/
+              only: /^10.0.*/
             branches:
-              only: /^9.0.x/
+              only: /^10.0.x/
