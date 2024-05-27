@@ -35,7 +35,6 @@
     "composer/installers": "~2",
     "oomphinc/composer-installers-extender": "~2",
     "drupal/core-composer-scaffold": "~10",
-    "symplify/vendor-patches": "~11",
     "webship/cucumber": "10.0.x-dev"
   },
   "conflict": {
