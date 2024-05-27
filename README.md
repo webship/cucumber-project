@@ -1,4 +1,4 @@
-[![CircleCI](https://circleci.com/gh/webship/cucumber/tree/10.x.svg?style=svg)](https://circleci.com/gh/webship/cucumber/tree/10.0.x) Cucumber 10.0.x-dev
+[![CircleCI](https://circleci.com/gh/webship/cucumber/tree/10.x.svg?style=svg)](https://circleci.com/gh/webship/cucumber/tree/11.0.x) Cucumber 11.0.x-dev
 
 # Cucumber Project
 
@@ -25,7 +25,7 @@ You might need to replace `composer` with `php composer.phar` (or similar)
 for your setup.
 
 
-To install the dev version of Cucumber 10.0.x run this command:
+To install the dev version of Cucumber 11.0.x run this command:
 ```
-composer create-project webship/cucumber-project:10.0.x-dev WEBSITE_NAME --stability dev --no-interaction
+composer create-project webship/cucumber-project:11.0.x-dev WEBSITE_NAME --stability dev --no-interaction
 ```
