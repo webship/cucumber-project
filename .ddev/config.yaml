@@ -1,0 +1,12 @@
+type: drupal
+docroot: web
+webserver_type: nginx-fpm
+database:
+  type: mariadb
+  version: "10.11"
+php_version: "8.3"
+nodejs_version: "22"
+composer_version: "2"
+corepack_enable: false
+use_dns_when_possible: true
+project_tld: ddev.site

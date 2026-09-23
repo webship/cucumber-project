@@ -1,0 +1,98 @@
+{
+    "name": "drupal/cucumber_project",
+    "description": "Project template for Cucumber, the Automated Functional Acceptance Testing Management system",
+    "type": "project",
+    "license": "GPL-2.0-or-later",
+    "homepage": "https://www.drupal.org/project/cucumber",
+    "support": {
+        "docs": "https://www.drupal.org/docs/extending-drupal/installing-drupal-distributions",
+        "issues": "https://www.drupal.org/project/issues/cucumber",
+        "source": "https://git.drupalcode.org/project/cucumber_project"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "authors": [
+        {
+            "name": "Webship",
+            "homepage": "https://www.drupal.org/webship",
+            "role": "Supporting organization"
+        },
+        {
+            "name": "Vardot",
+            "homepage": "https://www.drupal.org/vardot",
+            "role": "Supporting organization"
+        }
+    ],
+    "repositories": {
+        "drupal": {
+            "type": "composer",
+            "url": "https://packages.drupal.org/8"
+        }
+    },
+    "require": {
+        "composer/installers": "~2",
+        "drupal/core-composer-scaffold": "^11.4 || ^12",
+        "drupal/core": "^11.4 || ^12",
+        "webship/cucumber": "~12.0",
+        "drupal/media_directories": "^3.0@rc",
+        "drupal/media_directories_ui": "^3.0@rc",
+        "drupal/media_directories_editor": "^3.0@rc"
+    },
+    "conflict": {
+        "drupal/drupal": "*"
+    },
+    "config": {
+        "bin-dir": "bin/",
+        "secure-http": false,
+        "optimize-autoloader": true,
+        "preferred-install": {
+            "drupal/core": "dist"
+        },
+        "allow-plugins": {
+            "composer/installers": true,
+            "drupal/core-composer-scaffold": true,
+            "dealerdirect/phpcodesniffer-composer-installer": true,
+            "symfony/runtime": true,
+            "php-http/discovery": true,
+            "tbachert/spi": true
+        }
+    },
+    "extra": {
+        "drupal-scaffold": {
+            "allowed-packages": [
+                "drupal/core",
+                "webship/cucumber"
+            ],
+            "gitignore": true,
+            "locations": {
+                "web-root": "web/"
+            }
+        },
+        "installer-paths": {
+            "web/core": [
+                "type:drupal-core"
+            ],
+            "web/profiles/contrib/{$name}": [
+                "type:drupal-profile"
+            ],
+            "web/modules/contrib/{$name}": [
+                "type:drupal-module"
+            ],
+            "web/themes/contrib/{$name}": [
+                "type:drupal-theme"
+            ],
+            "web/libraries/{$name}": [
+                "type:drupal-library"
+            ],
+            "web/modules/custom/{$name}": [
+                "type:drupal-custom-module"
+            ],
+            "web/themes/custom/{$name}": [
+                "type:drupal-custom-theme"
+            ],
+            "drush/contrib/{$name}": [
+                "type:drupal-drush"
+            ]
+        }
+    }
+}
