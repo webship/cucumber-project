@@ -7,31 +7,50 @@ It gives you a Drupal codebase with the `web/` docroot, the contrib installer
 paths and the Cucumber distribution already required — nothing else. Use it as
 the starting point for a new Cucumber site.
 
-## Usage
+## Create a site with DDEV
 
-First you need to [install Composer](https://getcomposer.org/doc/00-intro.md#installation-linux-unix-osx).
+[DDEV](https://ddev.readthedocs.io/en/stable/users/install/ddev-installation/)
+is the documented way to run Cucumber. Composer, PHP, Drush and the database
+all run inside DDEV, so nothing is needed on your machine but DDEV itself.
 
-Create the project:
-
+```shell
+mkdir my-site && cd my-site
+ddev config --project-type=drupal --docroot=web
+ddev start
+ddev composer create-project drupal/cucumber_project:~12.0
+ddev restart
+ddev drush site:install cucumber --account-name=webmaster --account-pass=<password> -y
+ddev launch
 ```
+
+`ddev restart` is there because the template ships its own
+`.ddev/config.yaml` (PHP 8.3, Node.js 22, MariaDB 10.11), which lands in the
+project during `ddev composer create-project` and replaces the one
+`ddev config` wrote. The project name is not in that file: DDEV takes it from
+the directory, so the site is at `https://<directory>.ddev.site`.
+
+The installer asks which user roles, recipes and demo to add. To answer those
+questions in a browser instead, skip the `site:install` line and run
+`ddev launch` right away.
+
+Drush lives at `bin/drush`, not `vendor/bin/drush`: the template sets the
+Composer `bin-dir` to `bin/`, following the Cucumber profile. `ddev drush`
+finds it either way.
+
+## Without DDEV
+
+The same template works with a Composer, PHP and database stack of your own:
+
+```shell
 composer create-project drupal/cucumber_project:~12.0 my-site --no-interaction
 cd my-site
-```
-
-Then install the Cucumber distribution:
-
-```
 bin/drush site:install cucumber --account-name=webmaster --account-pass=<password> -y
 ```
 
-Drush lives at `bin/drush`, not `vendor/bin/drush`: the template sets the
-Composer `bin-dir` to `bin/`, following the Cucumber profile.
-
 ## Requirements
 
-* PHP 8.3 or newer.
-* Drupal core `^11.4 || ^12`.
-* Composer 2.
+* DDEV — or PHP 8.3 or newer, Composer 2 and a MySQL/MariaDB database.
+* Drupal core `^11.4 || ^12`. Drupal 11.4 on PHP 8.3 is the tested default.
 
 ## Stability
 
