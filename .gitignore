@@ -5,6 +5,7 @@
 /web/modules/contrib/
 /web/themes/contrib/
 /web/profiles/contrib/
+/recipes/
 /web/libraries/
 
 # Ignore sensitive information
