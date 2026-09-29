@@ -4,8 +4,10 @@ Composer project template for [Cucumber](https://www.drupal.org/project/cucumber
 the Automated Functional Acceptance Testing Management system built on Drupal.
 
 It gives you a Drupal codebase with the `web/` docroot, the contrib installer
-paths and the Cucumber distribution already required — nothing else. Use it as
-the starting point for a new Cucumber site.
+paths, the Cucumber distribution and its site template,
+[Cucumber Starter](https://www.drupal.org/project/cucumber_starter), already
+required, and nothing else. Use it as the starting point for a new Cucumber
+site.
 
 ## Create a site with DDEV
 
@@ -19,7 +21,7 @@ ddev config --project-type=drupal --docroot=web
 ddev start
 ddev composer create-project drupal/cucumber_project:~12.0
 ddev restart
-ddev drush site:install cucumber --account-name=webmaster --account-pass=<password> -y
+ddev drush site:install cucumber --account-name=webmaster --account-pass=<password> --site-name="<site name>" -y
 ddev launch
 ```
 
@@ -33,6 +35,23 @@ The installer asks which user roles, recipes and demo to add. To answer those
 questions in a browser instead, skip the `site:install` line and run
 `ddev launch` right away.
 
+The site asks everybody to sign in: a visitor who is not signed in is sent to
+`/user/login`, and lands on a dashboard after signing in.
+
+### With the site template
+
+The template also places the Cucumber Starter site template in
+`recipes/cucumber_starter`. To install the site from it, the way Drupal CMS
+installs a site template, replace the `site:install` line with:
+
+```shell
+ddev drush site:install ../recipes/cucumber_starter --account-name=webmaster --account-pass=<password> --site-name="<site name>" -y
+```
+
+The site template brings the Admin role and the three recipes. The other
+roles are turned on at
+`/admin/config/development/cucumber-user-roles/settings`.
+
 Drush lives at `bin/drush`, not `vendor/bin/drush`: the template sets the
 Composer `bin-dir` to `bin/`, following the Cucumber profile. `ddev drush`
 finds it either way.
@@ -44,7 +63,7 @@ The same template works with a Composer, PHP and database stack of your own:
 ```shell
 composer create-project drupal/cucumber_project:~12.0 my-site --no-interaction
 cd my-site
-bin/drush site:install cucumber --account-name=webmaster --account-pass=<password> -y
+bin/drush site:install cucumber --account-name=webmaster --account-pass=<password> --site-name="<site name>" -y
 ```
 
 ## Requirements
@@ -57,13 +76,21 @@ bin/drush site:install cucumber --account-name=webmaster --account-pass=<passwor
 Like every `drupal/*_project` template, this one sets `"minimum-stability": "dev"`
 with `"prefer-stable": true`. Everything that has a stable release is installed
 stable; the handful of Cucumber dependencies that do not yet have one
-(Display Builder, Media Directories) are resolved to their newest pre-release.
+(Display Builder) are resolved to their newest pre-release.
 
 `drupal/media_directories`, `drupal/media_directories_ui` and
 `drupal/media_directories_editor` carry an explicit `^3.0@rc` constraint in the
-root `require`. Their newest *stable* release is a Drupal 9-only 2.0.x, so
-without the flag `prefer-stable` picks a version that Drupal 11 refuses to
-install.
+root `require`, which keeps Composer away from their 2.0.x releases: those are
+for Drupal 9 only, and Drupal 11 refuses to install them.
+
+## Where the packages come from
+
+Everything Cucumber is made of comes from drupal.org: the modules and the
+theme from `packages.drupal.org`, and the `drupal/cucumber_starter` site
+template from its drupal.org repository. The distribution itself is required
+as `webship/cucumber`, the name its `composer.json` carries:
+`packages.drupal.org` does not serve installation profiles, so there is no
+`drupal/cucumber` package to require.
 
 ## Links
 

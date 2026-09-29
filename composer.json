@@ -34,6 +34,7 @@
         "drupal/core-composer-scaffold": "^11.4 || ^12",
         "drupal/core": "^11.4 || ^12",
         "webship/cucumber": "~12.0",
+        "drupal/cucumber_starter": "~1.0",
         "drupal/media_directories": "^3.0@rc",
         "drupal/media_directories_ui": "^3.0@rc",
         "drupal/media_directories_editor": "^3.0@rc"
@@ -43,7 +44,6 @@
     },
     "config": {
         "bin-dir": "bin/",
-        "secure-http": false,
         "optimize-autoloader": true,
         "preferred-install": {
             "drupal/core": "dist"
@@ -54,7 +54,7 @@
             "dealerdirect/phpcodesniffer-composer-installer": true,
             "symfony/runtime": true,
             "php-http/discovery": true,
-            "tbachert/spi": true
+            "tbachert/spi": false
         }
     },
     "extra": {
@@ -80,6 +80,9 @@
             ],
             "web/themes/contrib/{$name}": [
                 "type:drupal-theme"
+            ],
+            "recipes/{$name}": [
+                "type:drupal-recipe"
             ],
             "web/libraries/{$name}": [
                 "type:drupal-library"
