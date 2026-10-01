@@ -56,20 +56,28 @@ Drush lives at `bin/drush`, not `vendor/bin/drush`: the template sets the
 Composer `bin-dir` to `bin/`, following the Cucumber profile. `ddev drush`
 finds it either way.
 
-## Without DDEV
+## Drupal 12 (beta)
 
-The same template works with a Composer, PHP and database stack of your own:
+The template installs the latest Drupal 11 by default. It also allows Drupal 12,
+which needs PHP 8.5. To try it, set `php_version: "8.5"` in `.ddev/config.yaml`
+(a DDEV release with PHP 8.5 is needed), then:
 
 ```shell
-composer create-project drupal/cucumber_project:~12.0 my-site --no-interaction
-cd my-site
-bin/drush site:install cucumber --account-name=webmaster --account-pass=<password> --site-name="<site name>" -y
+ddev restart
+ddev composer require drupal/core:^12 drupal/core-composer-scaffold:^12 drupal/search:^1 -W
 ```
+
+Search left Drupal core in Drupal 12; Cucumber uses it, so the contrib
+`drupal/search` module comes with the upgrade.
+
+Contributed modules that don't declare Drupal 12 support yet are allowed by the
+`mglaman/composer-drupal-lenient` plugin (`extra.drupal-lenient.allowed-list`).
+Some of them still fail on Drupal 12.
 
 ## Requirements
 
-* DDEV — or PHP 8.3 or newer, Composer 2 and a MySQL/MariaDB database.
-* Drupal core `^11.4 || ^12`. Drupal 11.4 on PHP 8.3 is the tested default.
+* DDEV.
+* Drupal core `^11.4`, or `^12` with PHP 8.5. Drupal 11.4 on PHP 8.3 is the tested default.
 
 ## Stability
 
