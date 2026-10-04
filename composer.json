@@ -38,7 +38,9 @@
         "drupal/media_directories": "^3.0@rc",
         "drupal/media_directories_ui": "^3.0@rc",
         "drupal/media_directories_editor": "^3.0@rc",
-        "mglaman/composer-drupal-lenient": "^2.0"
+        "mglaman/composer-drupal-lenient": "^2.0",
+        "cweagans/composer-patches": "~2.0",
+        "webship/patches": "~12.0"
     },
     "conflict": {
         "drupal/drupal": "*"
@@ -56,7 +58,10 @@
             "symfony/runtime": true,
             "php-http/discovery": true,
             "tbachert/spi": false,
-            "mglaman/composer-drupal-lenient": true
+            "mglaman/composer-drupal-lenient": true,
+            "cweagans/composer-patches": true,
+            "webship/patches": true,
+            "oomphinc/composer-installers-extender": true
         }
     },
     "extra": {
@@ -193,6 +198,18 @@
                 "drupal/webform",
                 "drupal/xmlsitemap",
                 "drupal/yoast_seo"
+            ]
+        },
+        "enable-patching": true,
+        "composer-exit-on-patch-failure": true,
+        "patchLevel": {
+            "drupal/core": "-p2"
+        },
+        "patches": {},
+        "composer-patches": {
+            "allowed-dependency-patches": [
+                "webship/patches",
+                "webship/drupal-patches"
             ]
         }
     }
